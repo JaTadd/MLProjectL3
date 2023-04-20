@@ -46,31 +46,36 @@ X_train, X_test, y_train, y_test = train_test_split(
 # Vérification de la possible comparaison des données
 print(X_train.describe())
 
-
 # Visualisation du type de chaque variable
 print(X_train.dtypes)
 
-# # Visualisation de la distribution de chaque variable
-# n_cols = 3
-# n_rows = (len(X_train.columns) - 1) // n_cols + 1
-# fig, axs = plt.subplots(ncols=n_cols, nrows=n_rows, figsize=(20, 40))
-# index = 0
+# # Tracer un histogramme pour chaque variable explicative
 # for col in X_train.columns:
-#     i = index // n_cols
-#     j = index % n_cols
-#     sns.histplot(X_train[col], ax=axs[i, j], kde=False)
-#     axs[i, j].set_title(col)
-#     index += 1
-# plt.tight_layout(pad=0.4, w_pad=0.5, h_pad=5.0)
+#     plt.figure(figsize=(5, 4))
+#     sns.histplot(X_train[col])
+#     plt.title(col, fontsize=12)
+#     plt.xlabel("Valeur")
+#     plt.ylabel("Fréquence")
+#     plt.xlim(X_train[col].min(), X_train[col].max())
+#     plt.show()
+
+# # Visualisation de la distribution de chaque variable en 1 onglet
+# fig, axs = plt.subplots(ncols=3, nrows=12, figsize=(20, 60))
+# index = 0
+# for i, col in enumerate(X_train.columns):
+#     sns.histplot(X_train[col], ax=axs[i//3, i % 3])
+#     axs[i//3, i % 3].set_title(col, fontsize=12)
+#     axs[i//3, i % 3].set_xlabel("Valeur")
+#     axs[i//3, i % 3].set_ylabel("Fréquence")
+# plt.tight_layout()
 # plt.show()
-
-# Visualisation de la distribution de chaque variable
-
+"""
+# Tracer un diagramme en boîte pour chaque variable explicative
 for col in X_train.columns:
     plt.figure(figsize=(5, 4))
-    sns.histplot(X_train[col])
+    sns.boxplot(x=y_train, y=X_train[col])
     plt.title(col, fontsize=12)
-    plt.xlabel("Valeur")
-    plt.ylabel("Fréquence")
-    plt.xlim(X_train[col].min(), X_train[col].max())
+    plt.xlabel("Cible")
+    plt.ylabel("Valeur")
     plt.show()
+"""
