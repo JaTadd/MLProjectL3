@@ -2,8 +2,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 # Chargement des données
-Df_X = pd.read_csv('Data/Data_X.csv')
-Df_Y = pd.read_csv('Data/Data_Y.csv')
+Df_X = pd.read_csv('Data_X.csv')
+Df_Y = pd.read_csv('Data_Y.csv')
 
 # Fusion des ensembles de données
 DfNew_X = pd.merge(Df_X, Df_Y)
@@ -17,4 +17,9 @@ DfNew_X['FR_cons - net_import'] = DfNew_X['FR_CONSUMPTION'] - \
 print('FR_cons - net_import', DfNew_X['FR_cons - net_import'])
 
 # Trie des datas
-DfNew_X = DfNew_X.sort_values()
+DfNew_X.sort_index(inplace=True)
+
+# Suppression des valeurs manquantes
+DfNew_X.dropna(inplace=True)
+
+print(DfNew_X)
